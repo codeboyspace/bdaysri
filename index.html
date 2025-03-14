@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Card for Sri</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom right, #9333ea, #ec4899);
+            padding: 1rem;
+        }
+        
+        .card {
+            width: 100%;
+            max-width: 28rem;
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .confetti {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+        
+        .confetti-piece {
+            position: absolute;
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 9999px;
+            opacity: 0.7;
+        }
+        
+        .yellow {
+            background-color: #facc15;
+        }
+        
+        .pink {
+            background-color: #f472b6;
+        }
+        
+        .blue {
+            background-color: #60a5fa;
+        }
+        
+        .green {
+            background-color: #4ade80;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #9333ea, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transform: translateY(0);
+            opacity: 1;
+            transition: transform 1s, opacity 1s;
+        }
+        
+        .name {
+            font-size: 3.75rem;
+            font-weight: 800;
+            color: #9333ea;
+            margin-bottom: 0.5rem;
+            transform: translateY(0);
+            opacity: 1;
+            transition: transform 1s, opacity 1s;
+            transition-delay: 0.3s;
+        }
+        
+        .age-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transform: translateY(0);
+            opacity: 1;
+            transition: transform 1s, opacity 1s;
+            transition-delay: 0.7s;
+        }
+        
+        .happy-text {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #ec4899;
+        }
+        
+        .age-wrapper {
+            position: relative;
+        }
+        
+        .age {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #9333ea;
+        }
+        
+        .superscript {
+            position: absolute;
+            top: -0.25rem;
+            right: -0.75rem;
+            font-size: 1.25rem;
+            color: #ec4899;
+        }
+        
+        .cake {
+            margin-top: 1.5rem;
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            transition: transform 1s, opacity 1s, scale 1s;
+            transition-delay: 1s;
+        }
+        
+        .candles {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .candle {
+            width: 0.25rem;
+            height: 1.5rem;
+            background-color: #c084fc;
+            border-radius: 9999px;
+            margin: 0 0.25rem;
+        }
+        
+        .candle:nth-child(2) {
+            height: 2rem;
+            background-color: #f472b6;
+        }
+        
+        .flames {
+            position: absolute;
+            top: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+        
+        .flame {
+            width: 0.5rem;
+            height: 1rem;
+            background-color: #facc15;
+            border-radius: 9999px;
+            margin: 0 0.25rem;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .flame:nth-child(2) {
+            background-color: #fb923c;
+        }
+        
+        .cake-top {
+            width: 8rem;
+            height: 2rem;
+            background-color: #f9a8d4;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            margin: 0 auto;
+        }
+        
+        .cake-middle {
+            width: 10rem;
+            height: 2.5rem;
+            background-color: #f472b6;
+            margin: 0 auto;
+        }
+        
+        .cake-bottom {
+            width: 12rem;
+            height: 2rem;
+            background-color: #c084fc;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            margin: 0 auto;
+        }
+        
+        .message {
+            color: #4b5563;
+            margin-top: 1.5rem;
+            font-style: italic;
+            opacity: 1;
+            transition: opacity 1s;
+            transition-delay: 1.5s;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { 
+                opacity: 0.8;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+        
+        @keyframes fall {
+            0% { 
+                transform: translateY(-10px) rotate(0deg); 
+                opacity: 0; 
+            }
+            10% { 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translateY(100vh) rotate(360deg); 
+                opacity: 0; 
+            }
+        }
+        
+        /* Initial state classes for JS animation */
+        .hidden {
+            opacity: 0;
+            transform: translateY(2.5rem);
+        }
+        
+        .hidden-cake {
+            opacity: 0;
+            transform: translateY(2.5rem) scale(0.9);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- Confetti overlay -->
+        <div class="confetti" id="confetti">
+            <!-- Confetti pieces will be added by JavaScript -->
+        </div>
+        
+        <!-- Card content -->
+        <div class="card-content">
+            <div class="title hidden" id="title">Happy Birthday</div>
+            
+            <div class="name hidden" id="name">Sri</div>
+            
+            <div class="age-container hidden" id="age-container">
+                <span class="happy-text">Happy</span>
+                <div class="age-wrapper">
+                    <span class="age">16</span>
+                    <span class="superscript">th</span>
+                </div>
+            </div>
+            
+            <!-- Birthday cake -->
+            <div class="cake hidden-cake" id="cake">
+                <div class="candles">
+                    <div class="candle"></div>
+                    <div class="candle"></div>
+                    <div class="candle"></div>
+                    
+                    <!-- Flames -->
+                    <div class="flames">
+                        <div class="flame"></div>
+                        <div class="flame"></div>
+                        <div class="flame"></div>
+                    </div>
+                </div>
+                
+                <!-- Cake layers -->
+                <div class="cake-top"></div>
+                <div class="cake-middle"></div>
+                <div class="cake-bottom"></div>
+            </div>
+
+            <!-- Message -->
+            <p class="message hidden" id="message">
+                Wishing you an amazing day filled with joy and laughter!
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Create confetti
+        const confettiContainer = document.getElementById('confetti');
+        const confettiColors = ['yellow', 'pink', 'blue', 'green'];
+        
+        for (let i = 0; i < 40; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti-piece');
+            confetti.classList.add(confettiColors[i % 4]);
+            
+            // Random position
+            confetti.style.left = `${Math.random() * 100}%`;
+            confetti.style.top = `${Math.random() * 100}%`;
+            
+            // Random animation duration and delay
+            const duration = 2 + Math.random() * 4;
+            const delay = Math.random() * 2;
+            confetti.style.animation = `fall ${duration}s linear ${delay}s infinite`;
+            
+            confettiContainer.appendChild(confetti);
+        }
+
+        // Animate elements with delay
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('title').classList.remove('hidden');
+                
+                setTimeout(() => {
+                    document.getElementById('name').classList.remove('hidden');
+                    
+                    setTimeout(() => {
+                        document.getElementById('age-container').classList.remove('hidden');
+                        
+                        setTimeout(() => {
+                            document.getElementById('cake').classList.remove('hidden-cake');
+                            
+                            setTimeout(() => {
+                                document.getElementById('message').classList.remove('hidden');
+                            }, 500);
+                        }, 300);
+                    }, 400);
+                }, 300);
+            }, 100);
+        });
+    </script>
+</body>
+</html>
